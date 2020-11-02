@@ -1904,6 +1904,10 @@ impl Build {
             Some(v) => v == "macabi",
             None => false,
         };
+        self.print(&format!(
+            "[{}] arch={} is_catalyst={}",
+            target, arch, is_catalyst
+        ));
 
         let arch = if is_catalyst {
             match arch {
@@ -1954,7 +1958,7 @@ impl Build {
             ArchSpec::Catalyst(_) => "macosx",
         };
 
-        self.print(&format!("Detecting iOS SDK path for {}", sdk));
+        self.print(&format!("[{}] Detecting iOS SDK path for {}", target, sdk));
         let sdk_path = self.apple_sdk_root(sdk)?;
         cmd.args.push("-isysroot".into());
         cmd.args.push(sdk_path);
